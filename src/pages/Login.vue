@@ -67,7 +67,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .login {
   height: 100vh;
   background-image: url("../assets/images/login_background.jpg");

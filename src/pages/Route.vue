@@ -1,8 +1,9 @@
 <template>
+<div class="route">
       <div class="navbar">
     <div class='navbarContainer'>
     <div class="navbar-left">
-      <img class="navbar-left-img" src="../assets/images/logo.png" />
+      <img class="navbar-left-img" src="../assets/images/logo.svg" />
       <text class="navbar-left-text">流年絮语</text>
     </div>
     <div class="navbar-right">
@@ -15,19 +16,35 @@
     </div>
     </div>
   </div>
-  <div class="home-container">
+
+  <div class="route-container">
        <router-view></router-view>
   </div>
 
+<div class='route-footer'>
+     <div class='route-footer-firstLine'>
+         <a href="http://beian.miit.gov.cn" data-v-125ceb1c="">豫ICP备2020033754</a>
+     </div>
+     <div class='route-footer-secondLine'>
+        <img class="footer-img" src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="" data-v-125ceb1c="">
+       <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41132802000328" data-v-125ceb1c="">
+       豫公网安备 41132802000328号</a>
+      </div> 
+   </div>
+</div>
 </template>
 
-<script scoped>
+<script >
 export default {
-    name:'Home'
+    name:'Route'
 }
 </script>
   
-<style>
+<style scoped>
+.route{
+  position: relative;
+  height: 100%;
+}
  .navbar {
   position: fixed;
   left: 0;
@@ -74,8 +91,33 @@ export default {
 .router-link-active {
   color: #1e90ff;
 }
-.home-container{
-  padding-top:55px;
+.route-container{
+  padding:55px 60px 0;
 }
-
+.route-footer{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0px;
+  padding: 15px 0;
+  border-top: 1px solid #eaecef;
+}
+.route-footer-firstLine{
+   padding:20px 0;
+}
+.route-footer-secondLine{
+  display: flex;
+  justify-content: center;
+}
+.footer-img{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.route-footer a{
+ color: #1E90FF;
+}
 </style>
