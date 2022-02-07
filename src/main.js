@@ -1,15 +1,18 @@
-import * as Vue from 'vue';
+import {createApp} from 'vue';
 import App from './App.vue';
 import * as VueRouter from 'vue-router';
 import routes from './route';
-import './assets/style/resrt.css'
+import Antd from 'ant-design-vue';
+import './assets/style/resrt.css';
+import 'ant-design-vue/dist/antd.css';
 
 const router = VueRouter.createRouter({
     history: VueRouter.createWebHashHistory(),
     routes, 
   })
-const app = Vue.createApp(App);
+const app = createApp(App);
 
 app.use(router);
+app.use(Antd);
 
 app.mount('#app');

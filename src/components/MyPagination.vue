@@ -1,4 +1,14 @@
 <template>
+<div class='mypagination-container'>
+<div class='dataList'>
+   <div class='dataList-card' v-for="(item,index) in dataList" :key="index">
+       <div class='dataList-card-title'>{{item.title}}</div>
+       <div class='dataList-card-text'>
+           <text>{{item.date}}</text>
+           <text v-for='(label,index) in item.labels' :key='index'>{{label}}</text>
+       </div>
+   </div>
+ </div>
   <div class="my-pagination">
     <a @click='changePage(false)' href="javascript:;" :class="{disabled: currentPage===1}">上一页</a>
     <span v-if='currentPage > 3'>...</span>
@@ -6,6 +16,7 @@
     <span v-if='currentPage < pages - 2'>...</span>
     <a @click='changePage(true)' href="javascript:;" :class='{disabled: currentPage===pages}'>下一页</a>
   </div>
+</div>
 </template>
 <script>
 import { computed, ref } from 'vue'
@@ -20,12 +31,16 @@ export default {
     pagesize: {
       type: Number,
       default: 10
-    }
+    },
     // 默认初始页码
     // page: {
     //   type: Number,
     //   default: 1
-    // }
+    // },
+        dataList:{
+            type:Array,
+            default:()=>[{title:'标题',date:'2022-2-7',labels:['js','函数']},{title:'标题',date:'2022-2-7',labels:['js','函数']}]
+        }
   },
   setup (props, { emit, attrs }) {
     // attrs表示父组件传递的属性，但是props没有接收的属性，这种属性不是响应式的
@@ -96,6 +111,33 @@ export default {
 }
 </script>
 <style scoped lang="less">
+.mypagination-container{
+   width: 60%;
+}
+.dataList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 30px 0;
+   &-card{
+        width: 600px;
+        height: 100px;
+        border-radius: 5px;
+        box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+        padding: 16px 20px;
+        &-title{
+          font-size: 20px;
+          height: 46px;
+          line-height: 46px;
+        }
+        &-text text{
+          font-size: 16px;
+          margin-right: 8px;
+        }
+   }
+}
 .my-pagination {
   display: flex;
   justify-content: center;
@@ -109,12 +151,12 @@ export default {
     border-radius: 4px;
     margin-right: 10px;
     &:hover {
-      color: #27ba9b;
+      color: #1E90FF;
     }
     &.active {
-      background: #27ba9b;
+      background: #1E90FF;
       color: #fff;
-      border-color: #27ba9b;
+      border-color: #1E90FF;
     }
     &.disabled {
       cursor: not-allowed;

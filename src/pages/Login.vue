@@ -20,7 +20,6 @@
               />
             </div>
             <button @click="login">登录</button>
-             <button @click="profile">profile</button>
           </div>
           <div class="login-middle-bottom-secondDiv">
                <div @click='change'>
@@ -114,6 +113,7 @@ export default {
 .login-middle-bottom-firstDiv input{
    outline:none;
    height: 30px;
+   width: 194px;
 }
 .login-middle-bottom-firstDiv button{
    outline:none;

@@ -85,6 +85,9 @@ export default {
 .navber-right-first div {
   padding: 0 5px;
 }
+a{
+  color: #666;
+}
 .navbar-right div a:hover {
   color: #1e90ff;
 }
