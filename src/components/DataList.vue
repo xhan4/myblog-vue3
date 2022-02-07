@@ -1,7 +1,6 @@
 <template>
-<div class='mypagination-container'>
-<div class='dataList'>
-   <div class='dataList-card' v-for="(item,index) in dataList" :key="index">
+    <div class='dataList'>
+   <div class='dataList-card' v-for="(item,index) in data" :key="index">
        <div class='dataList-card-title'>{{item.title}}</div>
        <div class='dataList-card-text'>
            <text>{{item.date}}</text>
@@ -13,54 +12,30 @@
     <a @click='changePage(false)' href="javascript:;" :class="{disabled: currentPage===1}">上一页</a>
     <span v-if='currentPage > 3'>...</span>
     <a @click='changePage(item)' href="javascript:;" :class='{active: currentPage===item}' v-for='item in list' :key='item'>{{item}}</a>
-    <span v-if='currentPage < pages - 2'>...</span>
-    <a @click='changePage(true)' href="javascript:;" :class='{disabled: currentPage===pages}'>下一页</a>
+    <span v-if='currentPage < total - 2'>...</span>
+    <a @click='changePage(true)' href="javascript:;" :class='{disabled: currentPage===total}'>下一页</a>
   </div>
-</div>
 </template>
-<script>
-import { computed, ref } from 'vue'
 
+<script>
+import { ref } from '@vue/reactivity';
+import { computed } from '@vue/runtime-core';
 export default {
-  name: 'MyPagination',
-  props: {
-    total: {
-      type: Number,
-      default: 80
+    name:'DataList',
+    props:{
+        dataList:Array,
+        pageSize:Number
     },
-    pagesize: {
-      type: Number,
-      default: 10
-    },
-    // 默认初始页码
-    // page: {
-    //   type: Number,
-    //   default: 1
-    // },
-        dataList:{
-            type:Array,
-            default:()=>[{title:'标题',date:'2022-2-7',labels:['js','函数']},{title:'标题',date:'2022-2-7',labels:['js','函数']}]
-        }
-  },
-  setup (props, { emit, attrs }) {
-    // attrs表示父组件传递的属性，但是props没有接收的属性，这种属性不是响应式的
-    // 动态计算中期的页码信息
-    // 每页的条数
-    // const pagesize = 8
-    // 总页数
-    const pages = computed(() => Math.ceil(props.total / props.pagesize))
-    // 当前页码
-    // console.log(attrs.page)
-    const currentPage = ref(attrs.page || 1)
-    // 动态计算页码列表
+    setup(props){
+      const total =computed(()=>Math.ceil(props.dataList.length/props.pageSize)) 
+      const currentPage = ref(1)
+       // 动态计算页码列表
     const list = computed(() => {
-      // 当父组件传递total的值发生变化时，计算属性会重新计算
-      // pages = Math.ceil(props.total / props.pagesize)
       const result = []
       // 总页码小于等于5；大于5
-      if (pages.value <= 5) {
+      if (total.value <= 5) {
         // 总页码小于等于5的情况
-        for (let i = 1; i <= pages.value; i++) {
+        for (let i = 1; i <= total.value; i++) {
           result.push(i)
         }
       } else {
@@ -70,9 +45,9 @@ export default {
           for (let i = 1; i <= 5; i++) {
             result.push(i)
           }
-        } else if (currentPage.value >= pages.value - 1) {
+        } else if (currentPage.value >= total.value - 1) {
           // 右侧临界值
-          for (let i = pages.value - 4; i <= pages.value; i++) {
+          for (let i = total.value - 4; i <= total.value; i++) {
             result.push(i)
           }
         } else {
@@ -84,8 +59,7 @@ export default {
       }
       return result
     })
-    // 控制上一页和下一页变化
-    const changePage = (type) => {
+      const changePage=(type)=>{
       if (type === false) {
         // 上一页
         // 页面是第一页时，禁止点击操作
@@ -96,25 +70,33 @@ export default {
       } else if (type === true) {
         // 下一页
         // 页面是最后页时，禁止点击操作
-        if (currentPage.value === pages.value) return
-        if (currentPage.value < pages.value) {
+        if (currentPage.value === total.value) return
+        if (currentPage.value < total.value) {
           currentPage.value += 1
         }
       } else {
         // 点击页码
         currentPage.value = type
       }
-      emit('change-page', currentPage.value)
+      }
+      const data=computed(()=>{
+          let res=[]
+          if(props.dataList.length>currentPage.value*props.pageSize){
+              res=props.dataList.slice((currentPage.value-1)*props.pageSize,(currentPage.value-1)*props.pageSize+props.pageSize)
+          }else{
+              res=props.dataList.slice((currentPage.value-1)*props.pageSize)
+          }
+          return res;
+         
+      })
+       return {data,list,total,currentPage,changePage}
     }
-    return { list, currentPage, pages, changePage }
-  }
+   
 }
 </script>
-<style scoped lang="less">
-.mypagination-container{
-   width: 60%;
-}
-.dataList{
+
+<style scoped lang='less'>
+  .dataList{
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -1,36 +1,44 @@
 <template>
     <div class="home-container">
-   <MyPagination @change-page='changePage' :pagesize='10' :total='80' :page='1' />
+     <DataList :dataList='dataList' :pageSize='10'/>
    
  </div>
 </template>
 
 <script>
-import { reactive } from 'vue'
-import MyPagination from '../components/MyPagination'
+import DataList from '../components/DataList'
 
 export default {
-    name:'Home',
-    components: {
-    MyPagination,
-  },
-     setup () {
-    // 筛选条件准备
-    const reqParams = reactive({
-      // 当前页码
-      page: 1,
-      // 每页的条数
-      pageSize: 10
-    })
-    // 控制页码的变化
-    const changePage = (page) => {
-      // 修改分页参数，重新调用接口即可
-      // console.log(page)
-      reqParams.page = page
+    name:'Type',
+    components:{
+      DataList
+    },
+    data:function(){
+      return {
+        dataList:[
+          {title:'标题1',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题2',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题4',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题5',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题6',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题7',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题8',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题9',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题10',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题11',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题12',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题13',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题14',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题15',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题16',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题17',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题18',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题19',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题20',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题21',date:'2022-2-7',labels:['js','函数']}
+          ]}
     }
-
-    return { changePage }
-  }
  }
 </script>
 

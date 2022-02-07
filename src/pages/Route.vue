@@ -43,7 +43,7 @@ export default {
 <style scoped>
 .route{
   position: relative;
-  height: 100%;
+  min-height:100%
 }
  .navbar {
   position: fixed;
@@ -52,6 +52,7 @@ export default {
   z-index: 20;
   width:100%;
   box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.1);
+  background: #FFF;
 }
 .navbarContainer{
   display: flex;
@@ -95,7 +96,7 @@ a{
   color: #1e90ff;
 }
 .route-container{
-  padding:55px 60px 0;
+  padding:55px 60px 115px;
 }
 .route-footer{
   width: 100%;
