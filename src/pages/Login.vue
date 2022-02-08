@@ -53,12 +53,6 @@ export default {
       //        console.log(res.data,'res')
       //  })
     },
-    profile:()=>{
-      rest.get('user/profile')
-      // .then(res=>{
-      //      console.log(res.data,'res')
-      // })
-    },
     change:function(){
       console.log('我是chnage')
     }
@@ -69,7 +63,7 @@ export default {
 <style scoped>
 .login {
   height: 100vh;
-  background-image: url("../assets/images/login_background.jpg");
+  /* background-image: url("../assets/images/login_background.jpg") */
   background-size: cover;
 }
 .login-container {

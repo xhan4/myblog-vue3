@@ -8,11 +8,11 @@
     </div>
     <div class="navbar-right">
       <div class="navber-right-first">
-        <div><router-link to="/home">首页</router-link></div>
-        <div><router-link to="/type">类别</router-link></div>
-        <div><router-link to="/label">标签</router-link></div>
+        <div><router-link to="home">首页</router-link></div>
+        <div><router-link to="type">类别</router-link></div>
+        <div><router-link to="label">标签</router-link></div>
       </div>
-      <div><router-link to='/login'>登录</router-link></div>
+      <div><router-link to='login'>登录</router-link></div>
     </div>
     </div>
   </div>

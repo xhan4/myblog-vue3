@@ -1,6 +1,6 @@
 <template>
     <div class='dataList'>
-   <div class='dataList-card' v-for="(item,index) in data" :key="index">
+   <div class='dataList-card' v-for="(item,index) in data" :key="index" @click="toPage(index)">
        <div class='dataList-card-title'>{{item.title}}</div>
        <div class='dataList-card-text'>
            <text>{{item.date}}</text>
@@ -90,7 +90,14 @@ export default {
          
       })
        return {data,list,total,currentPage,changePage}
+    },
+    methods:{
+      toPage(taskId){
+        this.$router.push({name:'articleInfo',params:{taskId},query:{test:999}})
+        console.log(taskId)
+      }
     }
+    
    
 }
 </script>
