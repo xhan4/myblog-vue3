@@ -1,0 +1,17 @@
+@url=http://localhost:3000/user
+
+###
+get {{url}}
+
+###
+post {{url}}/login
+Content-Type: application/json
+
+{
+    "username":"test",
+    "password":"123456"
+}
+
+### 个人信息
+get {{url}}/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmI5Y2UwNDNlMGZmYjU5YTAwNWFiOCIsImlhdCI6MTY0Mzg4MzkzNn0.G6FctlaOgAy_h4Rbcfiy9r7v75p0fUxUZlB9MongEcM

@@ -1,5 +1,5 @@
 {
-  "name": "myblog-vue3-web",
+  "name": "myblog-vue3",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -49,6 +49,8 @@
     "no-unused-vars": "off",
     "no-console": "off",
     "no-irregular-whitespace": "off",
-    "no-debugger": "off"
+    "no-debugger": "off",
+    "no-mixed-spaces-and-tab":0,
+    "vue/comment-directive":"off"
   }
 }
