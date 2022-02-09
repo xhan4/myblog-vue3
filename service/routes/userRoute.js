@@ -1,7 +1,7 @@
 const express = require('express');
 const route =express.Router();
 const {userModal} = require('../modals');
-const { auth,getToken} = require('../content/untils');
+const { auth,getToken,getCaptcha} = require('../content/untils');
 
 
 
@@ -62,6 +62,14 @@ route.post('/login',async(req,res)=>{
       token:getToken(user._id)
    })
 })
+//验证码
+route.get("/code", (req, res) => {
+   let code = getCaptcha();
+  real_text=code.text.toLowerCase();
+  console.log(real_text);
+   res.type("svg");
+   res.send(code.data);
+});
 
 //个人信息
 route.get('/profile',auth,async(req,res)=>{

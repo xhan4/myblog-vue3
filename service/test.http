@@ -1,7 +1,7 @@
 @url=http://localhost:3000/user
 
 ###
-get {{url}}
+get {{url}}/code
 
 ###
 post {{url}}/login
