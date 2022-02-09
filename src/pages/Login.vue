@@ -11,20 +11,20 @@
               <div class="bform">
                 <input
                  type="text"
-                  v-model="loginForm.username"
+                  v-model="registerForm.username"
                   placeholder="用户名"
                 />
                 <input
                   type="password"
-                  v-model="loginForm.password"
+                  v-model="registerForm.password"
                   placeholder="密码"
                 />
                  <input
                   type="password"
-                  v-model="loginForm.password"
+                  v-model="registerForm.password"
                   placeholder="确认密码"
                 />
-                <button @click="login">登录</button>
+                <button @click="regiser">注册</button>
               </div>
             </div>
 
@@ -36,16 +36,16 @@
                   v-model="loginForm.username"
                   placeholder="用户名"
                 />
+                <span class="errTips" v-if="usernameError">* 用户名不能为空 *</span>
                 <input
                   type="password"
                   v-model="loginForm.password"
                   placeholder="密码"
                 />
-                 <input
-                  type="password"
-                  v-model="loginForm.password"
-                  placeholder="验证码"
-                />
+                <span class="errTips" v-if="passwordError">* 密码不能为空 *</span>
+               <!-- 验证码实现 -->
+               <input ref="codeValue" type="text" placeholder="验证码" v-model="code_text">
+               <img @click="getCode" :src="codeImg" alt="验证码">
                 <button @click="login">登录</button>
               </div>
             </div>
@@ -76,6 +76,7 @@
 
 <script>
 import * as rest from "../lib/rest";
+import profile from '../config/profile'
 export default {
   name: "Login",
   data() {
@@ -84,20 +85,44 @@ export default {
         username: "",
         password: "",
       },
+      registerForm:{
+       username:"",
+       password:""
+      },
       isLogin: false,
+      usernameError:false,
+      passwordError:false,
+      codeImg : `${profile.baseURL}/user/code?t=${new Date().getTime()}`,
+      code_text:""
     };
   },
   methods: {
     login: function () {
-      const params = { ...this.loginForm };
-      rest.login(params);
-      //  .then(res=>{
-      //        console.log(res.data,'res')
-      //  })
+      if(!this.loginForm.username){
+            this.usernameError=true;
+      }else if(!this.loginForm.password){
+           this.usernameError=false;
+           this.passwordError=true;
+      }else{
+         const params = { ...this.loginForm ,code_text:this.code_text};
+      rest.login(params).then(res=>{
+            if(res.data.code===400||res.data.code===422){
+               this.$message.error(`登录失败！${res.data.message}`);
+            }
+       })
+      }
+      
+    },
+     getCode() {
+        // 添加时间戳进行验证码切换
+        this.codeImg = `${profile.baseURL}/user/code?t=${new Date().getTime()}`;
+        this.$refs.codeValue.value = "";
+         },
+    regiser(){
+
     },
     changeType: function () {
       this.isLogin = !this.isLogin;
-      console.log(!this.isLogin);
     },
   },
 };
@@ -142,12 +167,20 @@ export default {
 }
 .bform {
   width: 100%;
-  height: 60%;
+  height: 80%;
   padding: 5px 0;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+}
+.bform .errTips{
+  display: block;
+  width: 50%;
+  text-align: left;
+  color: red;
+  font-size: 0.7em;
+  margin-left: 1em;
 }
 .login-middle-bottom-firstDiv {
   height: 100%;
@@ -211,7 +244,7 @@ export default {
 }
 .bigActive {
   left: 30%;
-  transition: all 0.5s;
+  transition: all 1s;
 }
 .smallActive {
   left: 30%;

@@ -2,8 +2,7 @@ const express = require('express');
 const route =express.Router();
 const {userModal} = require('../modals');
 const { auth,getToken,getCaptcha} = require('../content/untils');
-
-
+let real_text="";
 
 //用户注册
 route.post('/register',async(req,res)=>{
@@ -40,7 +39,13 @@ route.post('/register',async(req,res)=>{
 
 //用户登录
 route.post('/login',async(req,res)=>{
-      const user = await userModal.findOne({
+
+   if(!(req.body.code_text==real_text)){
+		res.send({code:400,message:"验证码错误"});
+		return;
+	}
+
+   const user = await userModal.findOne({
          username:req.body.username,
         })
       if(!user){
