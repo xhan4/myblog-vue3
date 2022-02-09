@@ -24,13 +24,13 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-### 项目service设置
+### service setup
 ```
 npm instal
 ```
-### 为开发编译和热重载
+### Compiles and minifies for production
 ```
 npm run start
 ```
-### 自定义配置
+###  Customize configuration
 请参阅配置参考。
