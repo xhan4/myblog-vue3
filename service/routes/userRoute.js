@@ -63,6 +63,7 @@ route.post('/login',async(req,res)=>{
    }
 
    res.send({
+      code:200,
       user,
       token:getToken(user._id)
    })

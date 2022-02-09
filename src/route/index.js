@@ -3,7 +3,8 @@ import Home from '../pages/Home';
 import Type from '../pages/Type';
 import Login from '../pages/Login';
 import Label from '../pages/Label';
-import ArticleInfo from '../pages/ArticleInfo'
+import ArticleInfo from '../pages/ArticleInfo';
+import System from '../managePages/System';
 
 const routes = [
     { path: '/',
@@ -17,6 +18,7 @@ const routes = [
         ]
     },
     { path: '/login',name:'login', component: Login},
+    { path: '/system',name:'system', component: System},
   ]
 
   export default routes;

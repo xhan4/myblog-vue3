@@ -105,9 +105,11 @@ export default {
            this.passwordError=true;
       }else{
          const params = { ...this.loginForm ,code_text:this.code_text};
-      rest.login(params).then(res=>{
+          rest.login(params).then(res=>{
             if(res.data.code===400||res.data.code===422){
                this.$message.error(`登录失败！${res.data.message}`);
+            }else if(res.data.code===200){
+                this.$router.push({name:"system"})
             }
        })
       }
