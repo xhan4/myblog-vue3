@@ -12,16 +12,17 @@
                 <input
                  type="text"
                   v-model="registerForm.username"
+                  autocomplete="off"
                   placeholder="用户名"
                 />
                 <input
-                  type="password"
+                  type="text"
                   v-model="registerForm.password"
                   placeholder="密码"
                 />
                  <input
-                  type="password"
-                  v-model="registerForm.password"
+                  type="text"
+                  v-model="registerForm.comfirmpassword"
                   placeholder="确认密码"
                 />
                 <button @click="regiser">注册</button>
