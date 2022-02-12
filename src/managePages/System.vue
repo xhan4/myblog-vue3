@@ -1,5 +1,5 @@
 <template>
-  <a-layout theme="light">
+  <a-layout theme="light" :style="{height:(windowH-170+'px')}">
     <a-layout-sider
     theme="light"
       breakpoint="lg"
@@ -28,24 +28,19 @@
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header :style="{ background: '#fff', padding: 0 }" />
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', background: '#fff', minHeight:'100%'}">content</div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center">
-        <a href="http://beian.miit.gov.cn" data-v-125ceb1c="">豫ICP备2020033754</a>
-        <div class='route-footer-secondLine'>
-        <img class="footer-img" src="https://img.alicdn.com/tfs/TB1..50QpXXXXX7XpXXXXXXXXXX-40-40.png" alt="" data-v-125ceb1c="">
-       <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=41132802000328" data-v-125ceb1c="">
-       豫公网安备 41132802000328号</a>
-      </div> 
+       <a-layout-footer style="padding: 12px">
       </a-layout-footer>
     </a-layout>
+    
   </a-layout>
 </template>
 <script>
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import profile from '../config/profile';
 export default defineComponent({
   components: {
     UserOutlined,
@@ -54,16 +49,17 @@ export default defineComponent({
   },
 
   setup() {
+    const windowH = profile.windowH
     const onCollapse = (collapsed, type) => {
       console.log(collapsed, type);
     };
-
     const onBreakpoint = broken => {
       console.log(broken);
     };
 
     return {
       selectedKeys: ref(['4']),
+      windowH,
       onCollapse,
       onBreakpoint,
     };
@@ -73,7 +69,6 @@ export default defineComponent({
 </script>
 <style>
 .ant-layout{
-  height:100%;
 }
 #components-layout-demo-responsive .logo {
   height: 32px;
@@ -88,7 +83,9 @@ export default defineComponent({
 .site-layout-background {
   background: #fff;
 }
-
+.ant-layout.ant-layout-has-sider{
+  background: red;
+}
 [data-theme='dark'] .site-layout-sub-header-background {
   background: #141414;
 }

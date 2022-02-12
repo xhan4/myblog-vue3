@@ -5,19 +5,43 @@
     <div class="navbar-left">
       <img class="navbar-left-img" src="../assets/images/logo.svg" />
       <text class="navbar-left-text">流年絮语</text>
+      
     </div>
     <div class="navbar-right">
       <div class="navber-right-first">
-        <div><router-link to="home">首页</router-link></div>
-        <div><router-link to="type">类别</router-link></div>
-        <div><router-link to="label">标签</router-link></div>
+         
+        <div><router-link to="home"><home-outlined />&nbsp;首页</router-link></div>
+        <div><router-link to="type"><appstore-outlined />&nbsp;类别</router-link></div>
+        <div><router-link to="label"><tag-outlined />&nbsp;标签</router-link></div>
+         <div><router-link v-if="state.isLogin" :style="{paddingRight:'10px'}" to="system"><setting-outlined />&nbsp;管理</router-link></div>
+          <a-input-search
+      v-model:value="state.value"
+      placeholder="input search text"
+      style="width: 200px"
+      @search="onSearch"
+    />
       </div>
-      <div><router-link to='login'>登录</router-link></div>
+      <div>
+        
+         <a-button v-if="!state.isLogin" type="primary" @click="showModal">登录</a-button>
+          <a-popover  v-else  title="个人信息" >
+             <template #content>
+              <a-menu>
+                   <a-menu-item @click="logout"><export-outlined />&nbsp;退出登录</a-menu-item>
+              </a-menu>
+           </template>
+           <a-avatar style="background-color: #f56a00" src="https://img0.baidu.com/it/u=17951455,3911166728&fm=26&fmt=auto" />
+          </a-popover>
+     </div>                          
+       
+       <a-modal v-model:visible="state.visible" width="600px" :footer="null" :closable="false" :bodyStyle="{padding:'0px'}">
+         <Login @close-Modal="closeModal"/>
+    </a-modal>
     </div>
     </div>
   </div>
 
-  <div class="route-container">
+  <div class="route-container" :style="{minHeight:(profile.windowH-115+'px')}">
        <router-view></router-view>
   </div>
 
@@ -34,10 +58,41 @@
 </div>
 </template>
 
-<script >
-export default {
-    name:'Route'
-}
+<script setup>
+import {reactive} from 'vue';
+import Login from './Login.vue';
+import profile from '../config/profile';
+import * as cache from '../lib/cache';
+import {useRouter} from 'vue-router';
+import {message} from 'ant-design-vue';
+import { HomeOutlined,SettingOutlined,AppstoreOutlined,ExportOutlined,TagOutlined} from '@ant-design/icons-vue';
+   const state = reactive({
+     visible:false,
+     isLogin:false,
+     value:"",
+     })
+   const router = useRouter();
+   if(cache.getSessionId()){
+        state.isLogin = true
+   }else{
+     state.isLogin = false
+   }
+    const onSearch = ()=>{
+      console.log(state.value,'value')
+    }
+    const showModal = ()=>{
+        state.visible = true
+    }
+    const closeModal = () => {
+        state.visible = false
+        state.isLogin = true
+     }
+     const logout = ()=>{
+        message.success(`退出成功`);
+        cache.removeSessionId();
+        router.push("/home")
+        state.isLogin = false
+     }
 </script>
   
 <style scoped>
@@ -84,7 +139,7 @@ export default {
   align-items: center;
 }
 .navber-right-first div {
-  padding: 0 5px;
+  padding: 0 10px;
 }
 a{
   color: #666;
@@ -96,7 +151,7 @@ a{
   color: #1e90ff;
 }
 .route-container{
-  padding:55px 60px 115px;
+   padding-top:55px;
 }
 .route-footer{
   width: 100%;
@@ -108,6 +163,7 @@ a{
   bottom: 0px;
   padding: 15px 0;
   border-top: 1px solid #eaecef;
+  background: #FFF;
 }
 .route-footer-firstLine{
    padding:20px 0;

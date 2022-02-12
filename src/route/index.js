@@ -14,11 +14,11 @@ const routes = [
          {path: 'home',name:'home', component: Home},
          {path: 'type',name:'type', component: Type },
          {path:'label',name:'label',component:Label},
+         {path: 'system',name:'system', component: System},
          {path:'articleInfo/:taskId',name:'articleInfo',component:ArticleInfo}
         ]
     },
     { path: '/login',name:'login', component: Login},
-    { path: '/system',name:'system', component: System},
   ]
 
   export default routes;

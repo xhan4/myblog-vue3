@@ -18,6 +18,19 @@ export default {
           {title:'标题1',date:'2022-2-7',labels:['js','函数']},
           {title:'标题2',date:'2022-2-7',labels:['js','函数']},
           {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+           {title:'标题1',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题2',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+           {title:'标题1',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题2',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+           {title:'标题1',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题2',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+           {title:'标题1',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题2',date:'2022-2-7',labels:['js','函数']},
+          {title:'标题3',date:'2022-2-7',labels:['js','函数']},
+
           ]}
     }
  }
@@ -26,7 +39,7 @@ export default {
 <style scoped>
  .home-container {
   height: 100%;
-  
+  padding-bottom: 115px;
 }
 
 

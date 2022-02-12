@@ -78,8 +78,13 @@
 <script>
 import * as rest from "../lib/rest";
 import profile from '../config/profile'
+import { message } from 'ant-design-vue'
+import * as cache from '../lib/cache';
 export default {
   name: "Login",
+  props:{
+    closeModal:Function
+  },
   data() {
     return {
       loginForm: {
@@ -108,9 +113,12 @@ export default {
          const params = { ...this.loginForm ,code_text:this.code_text};
           rest.login(params).then(res=>{
             if(res.data.code===400||res.data.code===422){
-               this.$message.error(`登录失败！${res.data.message}`);
+               message.error(`登录失败！${res.data.message}`);
             }else if(res.data.code===200){
+               cache.setSessionId(res.data.token)
+               message.success(`${res.data.message}`);
                 this.$router.push({name:"system"})
+                this.$emit('closeModal')
             }
        })
       }
@@ -133,8 +141,8 @@ export default {
 
 <style scoped>
 .login {
-  height: 100vh;
-  background-image: url("../assets/images/bk.jpg");
+  height:400px;
+  /* background-image: url("../assets/images/bk.jpg"); */
   background-size: cover;
 }
 .login-container {
