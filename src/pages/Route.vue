@@ -5,7 +5,6 @@
     <div class="navbar-left">
       <img class="navbar-left-img" src="../assets/images/logo.svg" />
       <text class="navbar-left-text">流年絮语</text>
-      
     </div>
     <div class="navbar-right">
       <div class="navber-right-first">
@@ -14,6 +13,7 @@
         <div><router-link to="type"><appstore-outlined />&nbsp;类别</router-link></div>
         <div><router-link to="label"><tag-outlined />&nbsp;标签</router-link></div>
          <div><router-link v-if="state.isLogin" :style="{paddingRight:'10px'}" to="system"><setting-outlined />&nbsp;管理</router-link></div>
+       <input type="password" style="display:none" />
           <a-input-search
       v-model:value.prevent="state.value"
       placeholder="input search text"
@@ -31,6 +31,7 @@
               </a-menu>
            </template>
            <a-avatar style="background-color: #f56a00" src="https://img0.baidu.com/it/u=17951455,3911166728&fm=26&fmt=auto" />
+           <text>admin</text>
           </a-popover>
      </div>                          
        
@@ -41,7 +42,7 @@
     </div>
   </div>
 
-  <div class="route-container" :style="{minHeight:(profile.windowH-115+'px')}">
+  <div class="route-container" :style="{minHeight:(profile.windowH-85+'px')}">
        <router-view></router-view>
   </div>
 
@@ -166,7 +167,7 @@ a{
   background: #FFF;
 }
 .route-footer-firstLine{
-   padding:20px 0;
+   padding:5px 0;
 }
 .route-footer-secondLine{
   display: flex;

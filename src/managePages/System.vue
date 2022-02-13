@@ -1,5 +1,5 @@
 <template>
-  <a-layout theme="light" :style="{height:(windowH-170+'px')}">
+  <a-layout theme="light" :style="{height:(windowH-140+'px')}">
     <a-layout-sider
     theme="light"
       breakpoint="lg"
