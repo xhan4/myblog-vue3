@@ -113,10 +113,10 @@ export default {
          const params = { ...this.loginForm ,code_text:this.code_text};
           rest.login(params).then(res=>{
             if(res.data.code===400||res.data.code===422){
-               message.error(`登录失败！${res.data.message}`);
+               message.error(`登录失败！${res.data.message}`,1.5);
             }else if(res.data.code===200){
                cache.setSessionId(res.data.token)
-               message.success(`${res.data.message}`);
+               message.success(`${res.data.message}`,1.5);
                 this.$router.push({name:"system"})
                 this.$emit('closeModal')
             }

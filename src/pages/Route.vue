@@ -15,7 +15,7 @@
         <div><router-link to="label"><tag-outlined />&nbsp;标签</router-link></div>
          <div><router-link v-if="state.isLogin" :style="{paddingRight:'10px'}" to="system"><setting-outlined />&nbsp;管理</router-link></div>
           <a-input-search
-      v-model:value="state.value"
+      v-model:value.prevent="state.value"
       placeholder="input search text"
       style="width: 200px"
       @search="onSearch"
@@ -23,7 +23,7 @@
       </div>
       <div>
         
-         <a-button v-if="!state.isLogin" type="primary" @click="showModal">登录</a-button>
+         <a-button v-if="!state.isLogin" type="primary" @click.prevent="showModal">登录</a-button>
           <a-popover  v-else  title="个人信息" >
              <template #content>
               <a-menu>
@@ -88,7 +88,7 @@ import { HomeOutlined,SettingOutlined,AppstoreOutlined,ExportOutlined,TagOutline
         state.isLogin = true
      }
      const logout = ()=>{
-        message.success(`退出成功`);
+        message.success(`退出成功`,1.5);
         cache.removeSessionId();
         router.push("/home")
         state.isLogin = false
